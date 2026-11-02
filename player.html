@@ -40,12 +40,12 @@
 
     .container {
       width: 100%;
-      max-width: 900px;
+      max-width: 960px;
     }
 
     header {
       text-align: center;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
     }
 
     .badge {
@@ -86,7 +86,7 @@
 
     p.subtitle {
       color: var(--text-muted);
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       max-width: 650px;
       margin: 0 auto;
       line-height: 1.6;
@@ -165,6 +165,116 @@
       filter: invert(0.9) hue-rotate(170deg) contrast(1.2);
     }
 
+    /* Customization Studio Box */
+    .customizer-box {
+      background: linear-gradient(135deg, rgba(30, 23, 18, 0.95), rgba(18, 14, 12, 0.95));
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 1.25rem;
+      padding: 2rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .customizer-box h2 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--gold-light);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group-full {
+      grid-column: span 2;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--gold-light);
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    input[type="text"], textarea, select {
+      width: 100%;
+      background: rgba(12, 10, 9, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 0.75rem 1rem;
+      border-radius: 0.6rem;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input[type="text"]:focus, textarea:focus, select:focus {
+      border-color: var(--gold-primary);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .slider-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    input[type="range"] {
+      flex: 1;
+      accent-color: var(--gold-primary);
+    }
+
+    .slider-val {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      width: 45px;
+      font-weight: 600;
+    }
+
+    .btn-generate {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold-primary), var(--amber-accent));
+      color: #000;
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      font-weight: 700;
+      padding: 0.9rem;
+      border: none;
+      border-radius: 0.6rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-generate:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(245, 158, 11, 0.3);
+    }
+
+    .btn-generate:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
     /* Track List */
     .tracks-section h2 {
       font-family: var(--font-display);
@@ -225,6 +335,7 @@
       display: flex;
       align-items: center;
       gap: 0.75rem;
+      flex-wrap: wrap;
     }
 
     .track-badge {
@@ -248,13 +359,7 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: transform 0.2s ease, background 0.2s ease;
       flex-shrink: 0;
-    }
-
-    .play-btn:hover {
-      background: var(--gold-light);
-      transform: scale(1.08);
     }
 
     footer {
@@ -271,9 +376,60 @@
       <div class="badge">Sarvam AI Powered</div>
       <h1>Heritage Storytelling Studio</h1>
       <p class="subtitle">
-        Bridging ancient oral archives and manuscripts with next-generation Indian language AI: Saaras v4 STT, Sarvam 105B Reasoning, and Bulbul v4 Flash Speech Synthesis.
+        Customize voice personas, speech pace, and emotional expressiveness with Bulbul v4 Flash and Sarvam 105B.
       </p>
     </header>
+
+    <!-- Customizer Form -->
+    <div class="customizer-box">
+      <h2>🎛️ Customize Audio Track</h2>
+      <div class="form-grid">
+        <div class="form-group-full">
+          <label>Historical Topic / Manuscript Excerpt</label>
+          <input type="text" id="custTopic" value="The Great Chola Navy and the maritime conquest of Srivijaya.">
+        </div>
+
+        <div>
+          <label>Voice Persona</label>
+          <select id="custPersona">
+            <option value="epic_narrator">Shubh — Epic Audiobook (Deep & Grand)</option>
+            <option value="docent_guide">Shubh — Museum Docent (Calm & Clear)</option>
+            <option value="suspense_drama">Rustom — Dramatic Suspense (Intense)</option>
+            <option value="folklore_teller">Aditi — Folklore & Stories (Warm)</option>
+            <option value="gentle_temple">Shubh — Sacred & Temple Lore (Gentle)</option>
+            <option value="hindi_documentary">Anand — Hindi Documentary (Authoritative)</option>
+            <option value="hindi_dramatic">Shubh — Hindi Dramatic Tales (Passionate)</option>
+            <option value="hindi_devotional">Ishita — Hindi Devotional Lore (Serene)</option>
+            <option value="hindi_character">Advait — Hindi Regal Ruler (Commanding)</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Speech Pace (Speed)</label>
+          <div class="slider-row">
+            <input type="range" id="custPace" min="0.6" max="1.4" step="0.05" value="0.95" oninput="document.getElementById('paceVal').innerText = this.value + 'x'">
+            <span class="slider-val" id="paceVal">0.95x</span>
+          </div>
+        </div>
+
+        <div>
+          <label>Expressiveness / Temperature</label>
+          <div class="slider-row">
+            <input type="range" id="custTemp" min="0.2" max="0.95" step="0.05" value="0.7" oninput="document.getElementById('tempVal').innerText = this.value">
+            <span class="slider-val" id="tempVal">0.70</span>
+          </div>
+        </div>
+
+        <div>
+          <label>Custom Spoken Script (Optional)</label>
+          <textarea id="custScript" placeholder="Leave empty for Sarvam 105B to auto-generate from topic..."></textarea>
+        </div>
+      </div>
+
+      <button class="btn-generate" id="btnGen" onclick="generateCustomAudio()">
+        ✨ Generate Customized Audio Track
+      </button>
+    </div>
 
     <!-- Now Playing Card -->
     <div class="now-playing-card" id="nowPlayingCard">
@@ -293,69 +449,26 @@
 
     <!-- Tracks List -->
     <section class="tracks-section">
-      <h2>Generated Heritage Audio Tracks</h2>
+      <h2>Audio Playlist</h2>
       <div class="track-list" id="trackList">
-        <!-- Track 1 -->
-        <div class="track-card active" onclick="playTrack(0)">
-          <div class="track-info">
-            <div class="track-title">Haldighati Pass: Saga of Empires</div>
-            <div class="track-meta">
-              <span class="track-badge">Archive Pipeline</span>
-              <span>Model: Bulbul v4 Flash</span>
-              <span>Persona: shubh_en_audiobook</span>
-            </div>
-          </div>
-          <button class="play-btn">▶</button>
-        </div>
-
-        <!-- Track 2 -->
-        <div class="track-card" onclick="playTrack(1)">
-          <div class="track-info">
-            <div class="track-title">The Stone Chariot of Hampi</div>
-            <div class="track-meta">
-              <span class="track-badge">Temple Lore</span>
-              <span>Model: Bulbul v4 Flash</span>
-              <span>Persona: shubh_enhi_ads</span>
-            </div>
-          </div>
-          <button class="play-btn">▶</button>
-        </div>
-
-        <!-- Track 3 -->
-        <div class="track-card" onclick="playTrack(2)">
-          <div class="track-info">
-            <div class="track-title">Scene Intro: The Haldighati Echoes</div>
-            <div class="track-meta">
-              <span class="track-badge">Docent Guide</span>
-              <span>Model: Bulbul v4 Flash</span>
-              <span>Persona: shubh_en_narration</span>
-            </div>
-          </div>
-          <button class="play-btn">▶</button>
-        </div>
-
-        <!-- Track 4 -->
-        <div class="track-card" onclick="playTrack(3)">
-          <div class="track-info">
-            <div class="track-title">Character: Maharana Pratap's Resolve</div>
-            <div class="track-meta">
-              <span class="track-badge">Historical Character</span>
-              <span>Model: Bulbul v4 Flash</span>
-              <span>Persona: rustom_en_suspense</span>
-            </div>
-          </div>
-          <button class="play-btn">▶</button>
-        </div>
+        <!-- Tracks dynamically rendered -->
       </div>
     </section>
 
     <footer>
-      Heritage Storytelling Agent &bull; Powered by Sarvam AI Model Family &bull; Local Workspace
+      Heritage Storytelling Agent &bull; Powered by Sarvam AI &bull; Bulbul v4 Flash
     </footer>
   </div>
 
   <script>
     const tracks = [
+      {
+        title: "Sun Temple of Konark",
+        tag: "Customized Narration (Pace: 0.9x)",
+        voice: "Voice: Shubh (Sacred & Gentle)",
+        script: "Behold Konark, a colossal stone chariot of the sun god, driven across the sky by twelve magnificent pairs of intricately carved wheels. Step closer, and let the silent, ancient stones whisper the glory of a bygone celestial age.",
+        file: "konark_custom.wav"
+      },
       {
         title: "Haldighati Pass: Saga of Empires",
         tag: "Archival STT & Narrative Pipeline",
@@ -392,7 +505,22 @@
     const npTag = document.getElementById('npTag');
     const npVoice = document.getElementById('npVoice');
     const npScript = document.getElementById('npScript');
-    const trackCards = document.querySelectorAll('.track-card');
+    const trackListContainer = document.getElementById('trackList');
+
+    function renderTrackList() {
+      trackListContainer.innerHTML = tracks.map((track, idx) => `
+        <div class="track-card ${idx === 0 ? 'active' : ''}" onclick="playTrack(${idx})">
+          <div class="track-info">
+            <div class="track-title">${track.title}</div>
+            <div class="track-meta">
+              <span class="track-badge">${track.tag}</span>
+              <span>${track.voice}</span>
+            </div>
+          </div>
+          <button class="play-btn">▶</button>
+        </div>
+      `).join('');
+    }
 
     function playTrack(index) {
       const track = tracks[index];
@@ -405,14 +533,59 @@
       player.load();
       player.play();
 
-      trackCards.forEach((card, idx) => {
-        if (idx === index) {
-          card.classList.add('active');
-        } else {
-          card.classList.remove('active');
-        }
+      document.querySelectorAll('.track-card').forEach((card, idx) => {
+        card.classList.toggle('active', idx === index);
       });
     }
+
+    async function generateCustomAudio() {
+      const btn = document.getElementById('btnGen');
+      const topic = document.getElementById('custTopic').value;
+      const persona = document.getElementById('custPersona').value;
+      const pace = parseFloat(document.getElementById('custPace').value);
+      const temperature = parseFloat(document.getElementById('custTemp').value);
+      const customScript = document.getElementById('custScript').value;
+
+      btn.disabled = true;
+      btn.innerText = "⏳ Generating Voice with Sarvam AI...";
+
+      try {
+        const res = await fetch("/api/generate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            topic,
+            persona,
+            pace,
+            temperature,
+            custom_script: customScript
+          })
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          const newTrack = {
+            title: data.title,
+            tag: `Custom Track (Pace: ${data.pace}x, Temp: ${data.temperature})`,
+            voice: `Voice: ${data.persona}`,
+            script: data.script,
+            file: data.file
+          };
+          tracks.unshift(newTrack);
+          renderTrackList();
+          playTrack(0);
+        } else {
+          alert("Generation error: " + (data.error || "Unknown error"));
+        }
+      } catch (err) {
+        alert("Please ensure the local server is running (python3 app.py) to generate live from browser.");
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "✨ Generate Customized Audio Track";
+      }
+    }
+
+    renderTrackList();
   </script>
 </body>
 </html>
