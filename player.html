@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heritage Storytelling Studio | Powered by Sarvam AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0c0a09;
+      --card-bg: rgba(26, 22, 19, 0.85);
+      --card-border: rgba(217, 119, 6, 0.25);
+      --gold-primary: #f59e0b;
+      --gold-light: #fbbf24;
+      --amber-accent: #d97706;
+      --text-main: #f5f5f4;
+      --text-muted: #a8a29e;
+      --font-display: 'Cinzel', serif;
+      --font-body: 'Outfit', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: radial-gradient(circle at 50% 0%, #29180b 0%, var(--bg) 60%);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      padding: 2.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      color: var(--gold-light);
+      padding: 0.35rem 0.9rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .badge::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 10px #10b981;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: 2.75rem;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      background: linear-gradient(135deg, #fff 20%, var(--gold-light) 70%, var(--amber-accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.75rem;
+    }
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Active Player Card */
+    .now-playing-card {
+      background: linear-gradient(145deg, rgba(38, 28, 20, 0.95), rgba(18, 14, 12, 0.9));
+      border: 1px solid var(--card-border);
+      border-radius: 1.25rem;
+      padding: 2rem;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), 0 0 30px rgba(217, 119, 6, 0.12);
+      backdrop-filter: blur(16px);
+      margin-bottom: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .now-playing-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+    }
+
+    .np-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .np-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gold-primary);
+      font-weight: 600;
+    }
+
+    .np-voice {
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 0.25rem 0.65rem;
+      border-radius: 0.5rem;
+    }
+
+    .np-title {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+
+    .np-script {
+      font-size: 1.05rem;
+      color: #d6d3d1;
+      line-height: 1.65;
+      font-style: italic;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 1.25rem;
+      border-radius: 0.75rem;
+      border-left: 3px solid var(--gold-primary);
+      margin-bottom: 1.5rem;
+    }
+
+    audio {
+      width: 100%;
+      height: 48px;
+      border-radius: 8px;
+      filter: invert(0.9) hue-rotate(170deg) contrast(1.2);
+    }
+
+    /* Track List */
+    .tracks-section h2 {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      margin-bottom: 1.25rem;
+      color: var(--gold-light);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .track-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .track-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1rem;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .track-card:hover {
+      border-color: rgba(245, 158, 11, 0.45);
+      background: rgba(38, 28, 20, 0.85);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    .track-card.active {
+      border-color: var(--gold-primary);
+      background: rgba(45, 30, 20, 0.95);
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.15);
+    }
+
+    .track-info {
+      flex: 1;
+    }
+
+    .track-title {
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: #fff;
+      margin-bottom: 0.25rem;
+    }
+
+    .track-meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .track-badge {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--gold-light);
+    }
+
+    .play-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--gold-primary);
+      border: none;
+      color: #000;
+      font-size: 1.1rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .play-btn:hover {
+      background: var(--gold-light);
+      transform: scale(1.08);
+    }
+
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      color: #78716c;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge">Sarvam AI Powered</div>
+      <h1>Heritage Storytelling Studio</h1>
+      <p class="subtitle">
+        Bridging ancient oral archives and manuscripts with next-generation Indian language AI: Saaras v4 STT, Sarvam 105B Reasoning, and Bulbul v4 Flash Speech Synthesis.
+      </p>
+    </header>
+
+    <!-- Now Playing Card -->
+    <div class="now-playing-card" id="nowPlayingCard">
+      <div class="np-header">
+        <span class="np-tag" id="npTag">Featured Historical Narration</span>
+        <span class="np-voice" id="npVoice">Voice: Shubh (Audiobook Persona)</span>
+      </div>
+      <div class="np-title" id="npTitle">Haldighati Pass: Saga of Empires</div>
+      <div class="np-script" id="npScript">
+        "Listen as the golden Haldighati pass bleeds under the weight of clashing empires in 1576. Here, the fierce echoes of history still whisper the blood-soaked saga of a bygone age."
+      </div>
+      <audio id="mainAudioPlayer" controls autoplay>
+        <source id="audioSource" src="archive_story_narration.wav" type="audio/wav">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <!-- Tracks List -->
+    <section class="tracks-section">
+      <h2>Generated Heritage Audio Tracks</h2>
+      <div class="track-list" id="trackList">
+        <!-- Track 1 -->
+        <div class="track-card active" onclick="playTrack(0)">
+          <div class="track-info">
+            <div class="track-title">Haldighati Pass: Saga of Empires</div>
+            <div class="track-meta">
+              <span class="track-badge">Archive Pipeline</span>
+              <span>Model: Bulbul v4 Flash</span>
+              <span>Persona: shubh_en_audiobook</span>
+            </div>
+          </div>
+          <button class="play-btn">▶</button>
+        </div>
+
+        <!-- Track 2 -->
+        <div class="track-card" onclick="playTrack(1)">
+          <div class="track-info">
+            <div class="track-title">The Stone Chariot of Hampi</div>
+            <div class="track-meta">
+              <span class="track-badge">Temple Lore</span>
+              <span>Model: Bulbul v4 Flash</span>
+              <span>Persona: shubh_enhi_ads</span>
+            </div>
+          </div>
+          <button class="play-btn">▶</button>
+        </div>
+
+        <!-- Track 3 -->
+        <div class="track-card" onclick="playTrack(2)">
+          <div class="track-info">
+            <div class="track-title">Scene Intro: The Haldighati Echoes</div>
+            <div class="track-meta">
+              <span class="track-badge">Docent Guide</span>
+              <span>Model: Bulbul v4 Flash</span>
+              <span>Persona: shubh_en_narration</span>
+            </div>
+          </div>
+          <button class="play-btn">▶</button>
+        </div>
+
+        <!-- Track 4 -->
+        <div class="track-card" onclick="playTrack(3)">
+          <div class="track-info">
+            <div class="track-title">Character: Maharana Pratap's Resolve</div>
+            <div class="track-meta">
+              <span class="track-badge">Historical Character</span>
+              <span>Model: Bulbul v4 Flash</span>
+              <span>Persona: rustom_en_suspense</span>
+            </div>
+          </div>
+          <button class="play-btn">▶</button>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Heritage Storytelling Agent &bull; Powered by Sarvam AI Model Family &bull; Local Workspace
+    </footer>
+  </div>
+
+  <script>
+    const tracks = [
+      {
+        title: "Haldighati Pass: Saga of Empires",
+        tag: "Archival STT & Narrative Pipeline",
+        voice: "Voice: Shubh (Audiobook Persona)",
+        script: "Listen as the golden Haldighati pass bleeds under the weight of clashing empires in 1576. Here, the fierce echoes of history still whisper the blood-soaked saga of a bygone age.",
+        file: "archive_story_narration.wav"
+      },
+      {
+        title: "The Stone Chariot of Hampi",
+        tag: "Heritage Monument Audio Tour",
+        voice: "Voice: Shubh (Natural Prosody)",
+        script: "Step into the heart of Hampi, where Emperor Krishnadevaraya’s sixteenth-century vision of the Vittala Temple still stands. Marvel at the iconic Stone Chariot, carved from solid granite with wheels that once spun freely, a timeless tribute to the celestial art and boundless genius of a bygone empire.",
+        file: "heritage_story.wav"
+      },
+      {
+        title: "Scene Intro: The Haldighati Echoes",
+        tag: "Museum Docent Introduction",
+        voice: "Voice: Shubh (Docent Narration)",
+        script: "In 1576, the golden Haldighati pass echoes with the clash of empires.",
+        file: "scene_narrator.wav"
+      },
+      {
+        title: "Character: Maharana Pratap's Resolve",
+        tag: "Historical Figure Dialogue",
+        voice: "Voice: Rustom (Dramatic Suspense)",
+        script: "My faithful Chetak and I shall not yield this soil to Akbar's might.",
+        file: "scene_character.wav"
+      }
+    ];
+
+    const player = document.getElementById('mainAudioPlayer');
+    const source = document.getElementById('audioSource');
+    const npTitle = document.getElementById('npTitle');
+    const npTag = document.getElementById('npTag');
+    const npVoice = document.getElementById('npVoice');
+    const npScript = document.getElementById('npScript');
+    const trackCards = document.querySelectorAll('.track-card');
+
+    function playTrack(index) {
+      const track = tracks[index];
+      npTitle.textContent = track.title;
+      npTag.textContent = track.tag;
+      npVoice.textContent = track.voice;
+      npScript.textContent = `"${track.script}"`;
+      
+      source.src = track.file;
+      player.load();
+      player.play();
+
+      trackCards.forEach((card, idx) => {
+        if (idx === index) {
+          card.classList.add('active');
+        } else {
+          card.classList.remove('active');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
